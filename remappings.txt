@@ -1,2 +1,3 @@
-components/=./src
-solecs/=./src/solecs/src/
+components/=src/
+solecs/=src/solecs/src/
+@solidstate/=lib/solidstate-solidity/
