@@ -1,0 +1,2 @@
+components/=./src
+solecs/=./src/solecs/src/

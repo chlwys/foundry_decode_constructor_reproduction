@@ -1,0 +1,52 @@
+{
+  "name": "@latticexyz/solecs",
+  "license": "MIT",
+  "version": "1.34.0",
+  "description": "Solidity Entity Component System",
+  "types": "./types/ethers-contracts/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/latticexyz/mud.git",
+    "directory": "packages/solecs"
+  },
+  "scripts": {
+    "prepare": "yarn build && chmod u+x git-install.sh",
+    "git:install": "bash git-install.sh",
+    "test": "forge test",
+    "build": "rimraf out && forge build --out out && yarn dist && yarn types",
+    "dist": "rimraf abi && mkdir abi && cat exports.txt | cut -d: -f7 | sort -n | uniq | xargs -n 1 sh -c 'cp out/\"$@\".sol/*.json abi/' sh && rimraf abi/*.metadata.json",
+    "types": "rimraf types && typechain --target=ethers-v5 abi/*.json",
+    "prettier": "prettier --write 'src/**/*.sol'",
+    "solhint": "solhint --config ./.solhint.json 'src/**/*.sol'",
+    "lint": "yarn prettier && yarn solhint",
+    "link": "yarn link",
+    "docs": "rimraf API && hardhat docgen && echo 'label: API\norder: 50' > API/index.yml",
+    "release": "npm publish || echo 'version already published'"
+  },
+  "devDependencies": {
+    "@rari-capital/solmate": "https://github.com/Rari-Capital/solmate.git#b6ae78e6ff490f8fec7695c7b65d06e5614f1b65",
+    "@solidstate/contracts": "^0.0.52",
+    "@typechain/ethers-v5": "^9.0.0",
+    "@types/mocha": "^9.1.1",
+    "ds-test": "https://github.com/dapphub/ds-test.git#c9ce3f25bde29fc5eb9901842bf02850dfd2d084",
+    "forge-std": "https://github.com/foundry-rs/forge-std.git#f36dab24d63d1c1945a05ed375ce341d3c1a49ed",
+    "hardhat": "^2.10.1",
+    "memmove": "https://github.com/dk1a/memmove.git#ffd71cd77b1708574ef46a667b23ca3a5cc9fa27",
+    "prettier": "^2.6.2",
+    "prettier-plugin-solidity": "^1.0.0-beta.19",
+    "rimraf": "^3.0.2",
+    "solhint": "^3.3.7",
+    "solidity-docgen": "^0.6.0-beta.22",
+    "ts-node": "10.7",
+    "typechain": "^8.1.1",
+    "typedoc": "^0.23.10"
+  },
+  "peerDependencies": {
+    "@rari-capital/solmate": "https://github.com/Rari-Capital/solmate.git#b6ae78e6ff490f8fec7695c7b65d06e5614f1b65",
+    "@solidstate/contracts": "^0.0.52",
+    "ds-test": "https://github.com/dapphub/ds-test.git#c9ce3f25bde29fc5eb9901842bf02850dfd2d084",
+    "forge-std": "https://github.com/foundry-rs/forge-std.git#f36dab24d63d1c1945a05ed375ce341d3c1a49ed",
+    "memmove": "https://github.com/dk1a/memmove.git#ffd71cd77b1708574ef46a667b23ca3a5cc9fa27"
+  },
+  "gitHead": "a722415d7a91dab1cc849f1c8c877146872a0444"
+}
